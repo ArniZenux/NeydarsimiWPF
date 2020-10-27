@@ -1,0 +1,17 @@
+﻿<Window x:Class="Neydarsimi.View.NewUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Neydarsimi.View"
+        mc:Ignorable="d"
+        Title="Nýr túlkur" Height="155" Width="250" ResizeMode="NoResize" Background="#B3B7B7">
+    <Grid>
+        <Label Content="Kennitala" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,20,0,0"/>
+        <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,20,0,0" Width="150" Height="25" Text="{Binding KennitalaBox, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Content="Fullt nafn" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,50,0,0"/>
+        <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,50,0,0" Width="150" Height="25" Text="{Binding FulltNafnBox, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Content="Skrá" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="125,85,0,0" Command="{Binding Vista_New_User_CMD}"/>
+        <Button Content="Loka" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="180,85,0,0" Click="Button_Click"/>
+    </Grid>
+</Window>
