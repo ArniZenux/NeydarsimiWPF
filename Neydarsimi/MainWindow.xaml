@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Neydarsimi"
         mc:Ignorable="d"
-        Title="Neyðarsími" Height="530" Width="900" ResizeMode="NoResize" Background="#B3B7B7">
+        Title="Neyðarsími" Height="525" Width="900" ResizeMode="NoResize" Background="#B3B7B7">
     <DockPanel>
         <Menu DockPanel.Dock="Top" FontSize="14">
             <MenuItem Header="Skráning">
@@ -30,7 +30,7 @@
             <MenuItem Header="Neyðarsími">
                 <MenuItem Header="Breyta neyðarsíma" Command="{Binding ChangeGSM_CMD}">
                     <MenuItem.Icon>
-                        <Image Source="img\new_2.png"/>
+                        <Image Source="img\update.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 
@@ -73,15 +73,15 @@
                         </Grid>
                 </GroupBox>
 
-            <GroupBox Grid.Column="1" Header="Neyðarsími" Height="455" Width="620" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0">
-                <DataGrid x:Name="xListView" Width="600" Height="420">
+            <GroupBox Grid.Column="1" Header="Listi neyðarsíma" Height="455" Width="640" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0">
+                <DataGrid x:Name="xListView" Width="620" Height="420">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="Nafn" Header="Nafn" Width="40" DisplayIndex="0"/>
-                        <DataGridTextColumn x:Name="Frá" Header="Frá" Width="40" DisplayIndex="1"/>
-                        <DataGridTextColumn x:Name="Til" Header="Til" Width="40" DisplayIndex="2"/>
-                        <DataGridTextColumn x:Name="Klukka_inn" Header="Kl" Width="40" DisplayIndex="3"/>
-                        <DataGridTextColumn x:Name="Klukkan_ut" Header="Kl" Width="40" DisplayIndex="4"/>
-                        <DataGridTextColumn x:Name="Vettvangur" Header="Vettvangur" Width="140" DisplayIndex="5"/>
+                        <DataGridTextColumn x:Name="Nafn" Header="Nafn" Width="130" DisplayIndex="0"/>
+                        <DataGridTextColumn x:Name="Frá" Header="Frá" Width="100" DisplayIndex="1"/>
+                        <DataGridTextColumn x:Name="Til" Header="Til" Width="100" DisplayIndex="2"/>
+                        <DataGridTextColumn x:Name="Klukka_inn" Header="Kl" Width="60" DisplayIndex="3"/>
+                        <DataGridTextColumn x:Name="Klukkan_ut" Header="Kl" Width="60" DisplayIndex="4"/>
+                        <DataGridTextColumn x:Name="Vettvangur" Header="Vettvangur" Width="160" DisplayIndex="5"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
