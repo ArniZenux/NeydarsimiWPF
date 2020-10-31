@@ -7,12 +7,14 @@ using System.Collections.ObjectModel;
 using System.Windows;
 using Neydarsimi.Helpers;
 using Neydarsimi.Data;
+using Neydarsimi.Model;
 
 namespace Neydarsimi.ViewModel
 {
     class ChangeUserVM : ViewModelBase
     {
         #region "Variable"
+        
         public int _KennitalaBox;
         public string _FulltNafnBox;
         public RelayCommand Change_user_CMD { get; set; }
