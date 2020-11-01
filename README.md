@@ -5,3 +5,6 @@ Neyðarsíminn er fyrir vakt táknmálstúlka t.d. um páska eða verslunarmanna
 
 Hugbúnaður hefur það hlutverk að einfalda skipulag túlkaþjónustunnar. Forritið getur geymt upplýsingar um hvaða túlkur á að sjá um neyðarsímann. Áður en hugbúnaður var smíðaður þá voru upplýsingar aðeins geymdar í Word eða munnlega. 
 
+https://notendur.hi.is/~arnijoha/cv/neydarsimi.html
+
+![alt text](https://notendur.hi.is/~arnijoha/cv/img/Capture.JPG)
