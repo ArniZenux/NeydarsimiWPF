@@ -80,3 +80,4 @@ C:\zoz\NeydarsimiWPF\Neydarsimi\obj\Debug\Neydarsimi.csproj.GenerateResource.cac
 C:\zoz\NeydarsimiWPF\Neydarsimi\obj\Debug\Neydarsimi.csproj.CopyComplete
 C:\zoz\NeydarsimiWPF\Neydarsimi\obj\Debug\Neydarsimi.exe
 C:\zoz\NeydarsimiWPF\Neydarsimi\obj\Debug\Neydarsimi.pdb
+C:\Zoz\NeydarsimiWPF\Neydarsimi\obj\Debug\Neydarsimi_Content.g.cs

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Neydarsimi.Helpers
+namespace Neydarsimi.Helper
 {
     public class RelayCommand : ICommand
     {

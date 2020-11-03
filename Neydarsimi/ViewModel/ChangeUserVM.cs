@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows;
-using Neydarsimi.Helpers;
+using Neydarsimi.Helper;
 using Neydarsimi.Data;
 using Neydarsimi.Model;
 
@@ -14,11 +14,13 @@ namespace Neydarsimi.ViewModel
     class ChangeUserVM : ViewModelBase
     {
         #region "Variable"
-        
         public int _KennitalaBox;
         public string _FulltNafnBox;
         public RelayCommand Change_user_CMD { get; set; }
         public RelayCommand SelectItemListbox_CMD { get; set; }
+
+        private DataContextSingleton context = DataContextSingleton.Instance;
+
         #endregion
 
         #region "svæði" 
@@ -83,11 +85,15 @@ namespace Neydarsimi.ViewModel
         //Hlaða list af túlkum. 
         public void LoadTulkur()
         {
-            _tulkslisti = new ObservableCollection<tulkur>()
+            var query = from d1 in context.Context.Tulkurs
+                        select d1;
+            _tulkslisti = new ObservableCollection<tulkur>(); 
+
+            /*_tulkslisti = new ObservableCollection<tulkur>()
             {
                 new tulkur() { kt = 123, nafn = "Arni" },
                 new tulkur() { kt = 321, nafn = "Ingi" },
-            };
+            };*/
         }
 
         public void Change_user_Fall(object obj)

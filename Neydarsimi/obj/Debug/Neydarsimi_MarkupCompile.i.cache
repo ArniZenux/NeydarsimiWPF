@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Zoz\Neydarsimi\Neydarsimi\obj\Debug\
+C:\Zoz\NeydarsimiWPF\Neydarsimi\obj\Debug\
 Neydarsimi
 none
 false
 DEBUG;TRACE
-C:\Zoz\Neydarsimi\Neydarsimi\App.xaml
+C:\Zoz\NeydarsimiWPF\Neydarsimi\App.xaml
 4-566704738
-
-201264527469
-212113069821
+2-1556844510
+221513159640
+23865042411
 MainWindow.xaml;View\ChangeNeydarsimi.xaml;View\ChangeUser.xaml;View\NewUser.xaml;
 
 False
