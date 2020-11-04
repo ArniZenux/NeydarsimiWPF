@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows;
 using Neydarsimi.Helper;
-using Neydarsimi.Data;
 using Neydarsimi.Model;
 
 namespace Neydarsimi.ViewModel
@@ -14,7 +13,7 @@ namespace Neydarsimi.ViewModel
     class ChangeUserVM : ViewModelBase
     {
         #region "Variable"
-        public int _KennitalaBox;
+        public string _KennitalaBox;
         public string _FulltNafnBox;
         public RelayCommand Change_user_CMD { get; set; }
         public RelayCommand SelectItemListbox_CMD { get; set; }
@@ -24,7 +23,7 @@ namespace Neydarsimi.ViewModel
         #endregion
 
         #region "svæði" 
-        public int KennitalaBox
+        public string KennitalaBox
         {
             get
             {
@@ -56,8 +55,8 @@ namespace Neydarsimi.ViewModel
             }
         }
 
-        private ObservableCollection<tulkur> _tulkslisti; 
-        public ObservableCollection<tulkur> Tulkslisti
+        private ObservableCollection<clsTulkur> _tulkslisti; 
+        public ObservableCollection<clsTulkur> Tulkslisti
         {
             get
             {
@@ -76,7 +75,7 @@ namespace Neydarsimi.ViewModel
             Change_user_CMD = new RelayCommand(Change_user_Fall);
             SelectItemListbox_CMD = new RelayCommand(SelectItemListbox_Fall);
             LoadTulkur();
-            KennitalaBox = 0;
+            KennitalaBox = string.Empty;
             FulltNafnBox = ""; 
         }
         #endregion
@@ -87,23 +86,31 @@ namespace Neydarsimi.ViewModel
         {
             var query = from d1 in context.Context.Tulkurs
                         select d1;
-            _tulkslisti = new ObservableCollection<tulkur>(); 
+            _tulkslisti = new ObservableCollection<clsTulkur>(); 
+        }
 
-            /*_tulkslisti = new ObservableCollection<tulkur>()
-            {
-                new tulkur() { kt = 123, nafn = "Arni" },
-                new tulkur() { kt = 321, nafn = "Ingi" },
-            };*/
+        public void NullStilla()
+        {
+            KennitalaBox = "";
+            FulltNafnBox = ""; 
         }
 
         public void Change_user_Fall(object obj)
         {
-            if (KennitalaBox != 0)
+            if (KennitalaBox != string.Empty)
             {
                 try
                 {
-                    MessageBox.Show("Vista Vista");
+                    Tulkur _tulkurUpdate = (from d1 in context.Context.Tulkurs
+                                            where d1.kt == KennitalaBox
+                                            select d1).First();
+                    _tulkurUpdate.kt = KennitalaBox;
+                    _tulkurUpdate.nafn = FulltNafnBox;
 
+                    context.Context.SaveChanges();
+
+                    LoadTulkur();
+                    NullStilla(); 
                 }
                 catch (Exception ex)
                 {
@@ -114,7 +121,7 @@ namespace Neydarsimi.ViewModel
             }
             else
             {
-                MessageBox.Show("EKKI VISTA");
+                MessageBox.Show("Innsetningarbox eru tómar", "Tilkynning");
             }
         }
 
@@ -122,7 +129,7 @@ namespace Neydarsimi.ViewModel
         {
             try
             {
-                var item = (tulkur)obj;
+                var item = (clsTulkur)obj;
                 if(item != null)
                 {
                     KennitalaBox = item.kt;

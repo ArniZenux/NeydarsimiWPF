@@ -11,11 +11,11 @@ namespace Neydarsimi.Helper
     {
         private static volatile DataContextSingleton instance;
         private static object syncRoot = new object();
-        public NeydarsimiDBEntities Context { get; private set; }
+        public Neydarsimi_DBEntities Context { get; private set; }
 
         public DataContextSingleton()
         {
-            Context = new NeydarsimiDBEntities();
+            Context = new Neydarsimi_DBEntities();
         }
 
         public static DataContextSingleton Instance

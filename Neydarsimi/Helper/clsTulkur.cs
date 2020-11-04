@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Neydarsimi.Data
+namespace Neydarsimi.Helper
 {
-    class tulkur
+    class clsTulkur
     {
-        public int kt { get; set; }
+        public string kt { get; set; }
         public string nafn { get; set; }
-        
     }
 }

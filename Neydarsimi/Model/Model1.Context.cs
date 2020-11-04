@@ -13,10 +13,10 @@ namespace Neydarsimi.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NeydarsimiDBEntities : DbContext
+    public partial class Neydarsimi_DBEntities : DbContext
     {
-        public NeydarsimiDBEntities()
-            : base("name=NeydarsimiDBEntities")
+        public Neydarsimi_DBEntities()
+            : base("name=Neydarsimi_DBEntities")
         {
         }
     
@@ -25,6 +25,8 @@ namespace Neydarsimi.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Neydarsimi1> Neydarsimi1 { get; set; }
         public virtual DbSet<Tulkur> Tulkurs { get; set; }
+        public virtual DbSet<Vinna> Vinnas { get; set; }
     }
 }

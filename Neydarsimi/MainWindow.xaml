@@ -58,7 +58,13 @@
 
                 <GroupBox Grid.Column="0" Header="Skráning neyðarsíma" Height="380" Width="220" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,80,0,0">
                         <Grid>
-                            <ListBox Width="190" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5"  />
+                            <ListBox Width="190" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding TulkurListi}"/>
+                                    </DataTemplate>    
+                                </ListBox.ItemTemplate>
+                            </ListBox>
                             <Label Content="Frá" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,160,0,0"/>
                             <DatePicker  Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80, 160, 0,0"/>
                             <Label Content="Til" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,190,0,0"/>

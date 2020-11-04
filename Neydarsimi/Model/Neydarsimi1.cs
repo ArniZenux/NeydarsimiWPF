@@ -12,18 +12,15 @@ namespace Neydarsimi.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Tulkur
+    public partial class Neydarsimi1
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tulkur()
-        {
-            this.Vinnas = new HashSet<Vinna>();
-        }
+        public int nr { get; set; }
+        public string byrja { get; set; }
+        public string endir { get; set; }
+        public string timi_byrja { get; set; }
+        public string timi_endir { get; set; }
+        public string tegund { get; set; }
     
-        public string kt { get; set; }
-        public string nafn { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vinna> Vinnas { get; set; }
+        public virtual Vinna Vinna { get; set; }
     }
 }

@@ -4,46 +4,174 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NeydarsimiDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Neydarsimi_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Neydarsimi1">
+          <Key>
+            <PropertyRef Name="nr" />
+          </Key>
+          <Property Name="nr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="byrja" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="endir" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="timi_byrja" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="timi_endir" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="tegund" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
         <EntityType Name="Tulkur">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="kt" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="nafn" Type="varchar" MaxLength="50" />
-          <Property Name="kt" Type="int" />
+          <Property Name="kt" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nafn" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="NeydarsimiDBModelStoreContainer">
+        <EntityType Name="Vinna">
+          <Key>
+            <PropertyRef Name="nr" />
+          </Key>
+          <Property Name="nr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kt" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="turn_off" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Vinna_Neydarsimi1">
+          <End Role="Neydarsimi1" Type="Self.Neydarsimi1" Multiplicity="1" />
+          <End Role="Vinna" Type="Self.Vinna" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Neydarsimi1">
+              <PropertyRef Name="nr" />
+            </Principal>
+            <Dependent Role="Vinna">
+              <PropertyRef Name="nr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vinna_Tulkur">
+          <End Role="Tulkur" Type="Self.Tulkur" Multiplicity="1" />
+          <End Role="Vinna" Type="Self.Vinna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tulkur">
+              <PropertyRef Name="kt" />
+            </Principal>
+            <Dependent Role="Vinna">
+              <PropertyRef Name="kt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Neydarsimi_DBModelStoreContainer">
+          <EntitySet Name="Neydarsimi1" EntityType="Self.Neydarsimi1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tulkur" EntityType="Self.Tulkur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vinna" EntityType="Self.Vinna" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Vinna_Neydarsimi1" Association="Self.FK_Vinna_Neydarsimi1">
+            <End Role="Neydarsimi1" EntitySet="Neydarsimi1" />
+            <End Role="Vinna" EntitySet="Vinna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vinna_Tulkur" Association="Self.FK_Vinna_Tulkur">
+            <End Role="Tulkur" EntitySet="Tulkur" />
+            <End Role="Vinna" EntitySet="Vinna" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="NeydarsimiDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Neydarsimi_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Neydarsimi1">
+          <Key>
+            <PropertyRef Name="nr" />
+          </Key>
+          <Property Name="nr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="byrja" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="endir" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="timi_byrja" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="timi_endir" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tegund" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vinna" Relationship="Self.FK_Vinna_Neydarsimi1" FromRole="Neydarsimi1" ToRole="Vinna" />
+        </EntityType>
         <EntityType Name="Tulkur">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="kt" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nafn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="kt" Type="Int32" />
+          <Property Name="kt" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nafn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Vinnas" Relationship="Self.FK_Vinna_Tulkur" FromRole="Tulkur" ToRole="Vinna" />
         </EntityType>
-        <EntityContainer Name="NeydarsimiDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityType Name="Vinna">
+          <Key>
+            <PropertyRef Name="nr" />
+          </Key>
+          <Property Name="nr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kt" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="turn_off" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Neydarsimi1" Relationship="Self.FK_Vinna_Neydarsimi1" FromRole="Vinna" ToRole="Neydarsimi1" />
+          <NavigationProperty Name="Tulkur" Relationship="Self.FK_Vinna_Tulkur" FromRole="Vinna" ToRole="Tulkur" />
+        </EntityType>
+        <Association Name="FK_Vinna_Neydarsimi1">
+          <End Role="Neydarsimi1" Type="Self.Neydarsimi1" Multiplicity="1" />
+          <End Role="Vinna" Type="Self.Vinna" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Neydarsimi1">
+              <PropertyRef Name="nr" />
+            </Principal>
+            <Dependent Role="Vinna">
+              <PropertyRef Name="nr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vinna_Tulkur">
+          <End Role="Tulkur" Type="Self.Tulkur" Multiplicity="1" />
+          <End Role="Vinna" Type="Self.Vinna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tulkur">
+              <PropertyRef Name="kt" />
+            </Principal>
+            <Dependent Role="Vinna">
+              <PropertyRef Name="kt" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Neydarsimi_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Neydarsimi1" EntityType="Self.Neydarsimi1" />
           <EntitySet Name="Tulkurs" EntityType="Self.Tulkur" />
+          <EntitySet Name="Vinnas" EntityType="Self.Vinna" />
+          <AssociationSet Name="FK_Vinna_Neydarsimi1" Association="Self.FK_Vinna_Neydarsimi1">
+            <End Role="Neydarsimi1" EntitySet="Neydarsimi1" />
+            <End Role="Vinna" EntitySet="Vinnas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vinna_Tulkur" Association="Self.FK_Vinna_Tulkur">
+            <End Role="Tulkur" EntitySet="Tulkurs" />
+            <End Role="Vinna" EntitySet="Vinnas" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NeydarsimiDBModelStoreContainer" CdmEntityContainer="NeydarsimiDBEntities">
+        <EntityContainerMapping StorageEntityContainer="Neydarsimi_DBModelStoreContainer" CdmEntityContainer="Neydarsimi_DBEntities">
+          <EntitySetMapping Name="Neydarsimi1">
+            <EntityTypeMapping TypeName="Neydarsimi_DBModel.Neydarsimi1">
+              <MappingFragment StoreEntitySet="Neydarsimi1">
+                <ScalarProperty Name="nr" ColumnName="nr" />
+                <ScalarProperty Name="byrja" ColumnName="byrja" />
+                <ScalarProperty Name="endir" ColumnName="endir" />
+                <ScalarProperty Name="timi_byrja" ColumnName="timi_byrja" />
+                <ScalarProperty Name="timi_endir" ColumnName="timi_endir" />
+                <ScalarProperty Name="tegund" ColumnName="tegund" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Tulkurs">
-            <EntityTypeMapping TypeName="NeydarsimiDBModel.Tulkur">
+            <EntityTypeMapping TypeName="Neydarsimi_DBModel.Tulkur">
               <MappingFragment StoreEntitySet="Tulkur">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nafn" ColumnName="nafn" />
                 <ScalarProperty Name="kt" ColumnName="kt" />
+                <ScalarProperty Name="nafn" ColumnName="nafn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vinnas">
+            <EntityTypeMapping TypeName="Neydarsimi_DBModel.Vinna">
+              <MappingFragment StoreEntitySet="Vinna">
+                <ScalarProperty Name="nr" ColumnName="nr" />
+                <ScalarProperty Name="kt" ColumnName="kt" />
+                <ScalarProperty Name="turn_off" ColumnName="turn_off" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

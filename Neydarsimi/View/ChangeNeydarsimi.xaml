@@ -7,10 +7,6 @@
         mc:Ignorable="d"
           Title="Breyta neyðarsíma" Height="535" Width="910" ResizeMode="NoResize" Background="#B3B7B7">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="320*"/>
-            <RowDefinition Height="181*"/>
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="260"/>
             <ColumnDefinition Width="650"/>

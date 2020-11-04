@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using Neydarsimi.Helper;
 using Neydarsimi.View;
+using Neydarsimi.Model;
 
 namespace Neydarsimi.ViewModel
 {
@@ -19,9 +21,28 @@ namespace Neydarsimi.ViewModel
         public RelayCommand ChangeUser_CMD { get; set; }
         public RelayCommand ChangeGSM_CMD { get; set; }
         public RelayCommand BookingProject_CMD { get; set; }
+
+        private DataContextSingleton context = DataContextSingleton.Instance;
+
         #endregion
 
         #region "Svæði"
+        public string _TulkurListi;
+        public string TulkurListi
+        {
+            get
+            {
+                return _TulkurListi;
+            }
+            set
+            {
+                if(_TulkurListi != value)
+                {
+                    _TulkurListi = value;
+                    NotifyPropertyChanged("TulkurListi");
+                }
+            }
+        }
         public string KlukkInnBox
         {
             get
@@ -71,8 +92,21 @@ namespace Neydarsimi.ViewModel
             }
         }
 
+        private ObservableCollection<clsTulkur> _tulkslisti;
+        public ObservableCollection<clsTulkur> Tulkslisti
+        {
+            get
+            {
+                return _tulkslisti;
+            }
+            set
+            {
+                _tulkslisti = value;
+                NotifyPropertyChanged("TulkurListi");
+            }
+        }
         #endregion
-
+        
         #region "Main VM"
         public MainVM()
         {
@@ -117,12 +151,13 @@ namespace Neydarsimi.ViewModel
         {
 
         }
-
-        
+                
         //Hlaða list af túlkum. 
         public void LoadTulkur()
         {
-
+            var query = from d1 in context.Context.Tulkurs
+                        select d1;
+            _tulkslisti = new ObservableCollection<clsTulkur>();
         }
         #endregion
     }

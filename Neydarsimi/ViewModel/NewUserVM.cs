@@ -5,21 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Neydarsimi.Helper;
-using Neydarsimi.Data; 
+using Neydarsimi.Model;
 
 namespace Neydarsimi.ViewModel
 {
     class NewUserVM : ViewModelBase
     {
         #region "Variable"
-        public int _KennitalaBox;
-        public string _FulltNafnBox; 
-        
+        public string _KennitalaBox;
+        public string _FulltNafnBox;
+        private DataContextSingleton context = DataContextSingleton.Instance;
+
         public RelayCommand Vista_New_User_CMD { get; set; }
         #endregion
 
-        #region "svæði" 
-        public int KennitalaBox
+        #region "Svæði" 
+        public string KennitalaBox
         {
             get
             {
@@ -62,13 +63,34 @@ namespace Neydarsimi.ViewModel
         #region "Functions"
         public void Vista_New_User_Fall(object obj)
         {
-            if(KennitalaBox != 0)
+            if(KennitalaBox != string.Empty)
             {
-                MessageBox.Show("Vista Vista");
+                try
+                {
+                    Tulkur _tulkur = new Tulkur
+                    {
+                        kt = KennitalaBox,
+                        nafn = FulltNafnBox
+                    };
+
+                    context.Context.Tulkurs.Add(_tulkur);
+                    context.Context.SaveChanges();
+
+                    MessageBox.Show("Nýr tulkur vistaður.", "Tilkynning");
+
+                    //bæta við eventSystem.publish seinna 
+
+                }
+                catch (Exception ex)
+                {
+                    string message = ex.Message;
+                    MessageBox.Show("Gagnavilla: " , ex.Message);
+                }
+
             }
             else
             {
-                MessageBox.Show("EKKI VISTA");
+                MessageBox.Show("Innsetningarbox eru tómar","Tilkynning");
             }
         }
         #endregion
