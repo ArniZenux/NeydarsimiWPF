@@ -57,10 +57,16 @@ namespace Neydarsimi.ViewModel
         public NewUserVM()
         {
             Vista_New_User_CMD = new RelayCommand(Vista_New_User_Fall);
+            NullStilla();
         }
         #endregion
 
         #region "Functions"
+        public void NullStilla()
+        {
+            KennitalaBox = "";
+            FulltNafnBox = ""; 
+        }
         public void Vista_New_User_Fall(object obj)
         {
             if(KennitalaBox != string.Empty)

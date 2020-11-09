@@ -55,8 +55,8 @@ namespace Neydarsimi.ViewModel
             }
         }
 
-        private ObservableCollection<clsTulkur> _tulkslisti; 
-        public ObservableCollection<clsTulkur> Tulkslisti
+        private ObservableCollection<Tulkur> _tulkslisti; 
+        public ObservableCollection<Tulkur> Tulkslisti
         {
             get
             {
@@ -86,7 +86,7 @@ namespace Neydarsimi.ViewModel
         {
             var query = from d1 in context.Context.Tulkurs
                         select d1;
-            _tulkslisti = new ObservableCollection<clsTulkur>(); 
+            _tulkslisti = new ObservableCollection<Tulkur>(query); 
         }
 
         public void NullStilla()
@@ -123,7 +123,7 @@ namespace Neydarsimi.ViewModel
             {
                 MessageBox.Show("Innsetningarbox eru tómar", "Tilkynning");
             }
-        }
+         }
 
         public void SelectItemListbox_Fall(object obj)
         {

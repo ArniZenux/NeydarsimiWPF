@@ -9,20 +9,19 @@
         Title="Breyta túlk" Height="320" Width="255" ResizeMode="NoResize" Background="#B3B7B7">
     <Grid>
 
-        <ListBox x:Name="xListbox" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="220" Height="165" ItemsSource="{Binding Tulkslisti}">
+        <ListView  x:Name="xListView" SelectedItem="{Binding SelectItemListbox_CMD}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="220" Height="165" ItemsSource="{Binding Tulkslisti}">
             <i:Interaction.Triggers>
                 <i:EventTrigger>
-                    <i:InvokeCommandAction Command="{Binding SelectItemListbox_CMD}" CommandParameter="{Binding ElementName=xListbox, Path=SelectedItem}"></i:InvokeCommandAction>
+                    <i:InvokeCommandAction Command="{Binding SelectItemListbox_CMD}" CommandParameter="{Binding ElementName=xListView, Path=SelectedItem}"></i:InvokeCommandAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-           <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock x:Name="Name" Text="{Binding nafn}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+            <ListView.View>
+                <GridView>           
+                    <GridViewColumn Header="Nafn" Width="210" DisplayMemberBinding="{Binding nafn}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+     
 
         <Label Content="Kennitala" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,180,0,0"/>
         <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,180,0,0" Width="150" Height="25" Text="{Binding KennitalaBox, UpdateSourceTrigger=PropertyChanged}"/>

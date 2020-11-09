@@ -92,8 +92,8 @@ namespace Neydarsimi.ViewModel
             }
         }
 
-        private ObservableCollection<clsTulkur> _tulkslisti;
-        public ObservableCollection<clsTulkur> Tulkslisti
+        private ObservableCollection<Tulkur> _tulkslisti;
+        public ObservableCollection<Tulkur> Tulkslisti
         {
             get
             {
@@ -103,6 +103,20 @@ namespace Neydarsimi.ViewModel
             {
                 _tulkslisti = value;
                 NotifyPropertyChanged("TulkurListi");
+            }
+        }
+
+        public ObservableCollection<clsNeydarsimi> _neydarsimiData;
+        public ObservableCollection<clsNeydarsimi> NeydarsimiData
+        {
+            get
+            {
+                return _neydarsimiData;
+            }
+            set
+            {
+                _neydarsimiData = value;
+                NotifyPropertyChanged("NeydarsimiData");
             }
         }
         #endregion
@@ -149,7 +163,33 @@ namespace Neydarsimi.ViewModel
         //Hlaða lista af neyðarsíma túlka
         public void LoadNeydarsimi()
         {
-
+            var query = from d1 in context.Context.Tulkurs
+                        from d2 in context.Context.Vinnas
+                        from d3 in context.Context.Neydarsimi1
+                        where d1.kt == d2.kt && d2.nr == d3.nr
+                        select new
+                        {
+                            d3.nr,
+                            d1.nafn,
+                            d3.timi_byrja,
+                            d3.timi_endir,
+                            d3.byrja,
+                            d3.endir,
+                            d3.tegund
+                        };
+            foreach (var str in query)
+            {
+                _neydarsimiData.Add(new clsNeydarsimi()
+                {
+                    nr = str.nr,
+                    nafn = str.nafn,
+                    byrja = str.byrja,
+                    endir = str.endir,
+                    timi_byrja = str.timi_byrja,
+                    timi_endir = str.timi_endir,
+                    tegund = str.tegund
+                });
+            }
         }
                 
         //Hlaða list af túlkum. 
@@ -157,7 +197,7 @@ namespace Neydarsimi.ViewModel
         {
             var query = from d1 in context.Context.Tulkurs
                         select d1;
-            _tulkslisti = new ObservableCollection<clsTulkur>();
+            _tulkslisti = new ObservableCollection<Tulkur>(query);
         }
         #endregion
     }

@@ -56,15 +56,21 @@
                         </Grid>
                 </GroupBox>
 
-                <GroupBox Grid.Column="0" Header="Skráning neyðarsíma" Height="380" Width="220" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,80,0,0">
+            <GroupBox Grid.Column="0" Header="Skráning neyðarsíma" Height="380" Width="220" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,80,0,0"  >
                         <Grid>
-                            <ListBox Width="190" Height="150" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding TulkurListi}"/>
-                                    </DataTemplate>    
-                                </ListBox.ItemTemplate>
-                            </ListBox>
+                            <ListView  x:Name="xListView" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="190" Height="140" ItemsSource="{Binding Tulkslisti}">
+                                <ListView.View>
+                                    <GridView>
+                                        <!-- <i:Interaction.Triggers>
+                                                <i:EventTrigger>
+                                                    <i:InvokeCommandAction Command="{Binding SelectItemListbox_CMD}" CommandParameter="{Binding ElementName=xListView, Path=SelectedItem}"></i:InvokeCommandAction>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                            -->
+                                        <GridViewColumn Header="Nafn" Width="180" DisplayMemberBinding="{Binding nafn}"/>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
                             <Label Content="Frá" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,160,0,0"/>
                             <DatePicker  Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80, 160, 0,0"/>
                             <Label Content="Til" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,190,0,0"/>
@@ -80,14 +86,14 @@
                 </GroupBox>
 
             <GroupBox Grid.Column="1" Header="Listi neyðarsíma" Height="455" Width="640" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0">
-                <DataGrid x:Name="xListView" Width="620" Height="420">
+                <DataGrid x:Name="xDataGrid" Width="620" Height="420" ItemsSource="{Binding Path=NeydarsimiData}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="Nafn" Header="Nafn" Width="130" DisplayIndex="0"/>
-                        <DataGridTextColumn x:Name="Frá" Header="Frá" Width="100" DisplayIndex="1"/>
-                        <DataGridTextColumn x:Name="Til" Header="Til" Width="100" DisplayIndex="2"/>
-                        <DataGridTextColumn x:Name="Klukka_inn" Header="Kl" Width="60" DisplayIndex="3"/>
-                        <DataGridTextColumn x:Name="Klukkan_ut" Header="Kl" Width="60" DisplayIndex="4"/>
-                        <DataGridTextColumn x:Name="Vettvangur" Header="Vettvangur" Width="160" DisplayIndex="5"/>
+                        <DataGridTextColumn x:Name="Nafn" Header="Nafn" Width="130" Binding="{Binding nafn}" DisplayIndex="0"/>
+                        <DataGridTextColumn x:Name="Frá" Header="Frá" Width="100" Binding="{Binding byrja}" DisplayIndex="1"/>
+                        <DataGridTextColumn x:Name="Til" Header="Til" Width="100" Binding="{Binding endir}" DisplayIndex="2"/>
+                        <DataGridTextColumn x:Name="Klukka_inn" Header="Kl" Width="60" Binding="{Binding timi_byrja}" DisplayIndex="3"/>
+                        <DataGridTextColumn x:Name="Klukkan_ut" Header="Kl" Width="60" Binding="{Binding timi_endir}" DisplayIndex="4"/>
+                        <DataGridTextColumn x:Name="Vettvangur" Header="Vettvangur" Width="160" Binding="{Binding tegund}" DisplayIndex="5"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>
