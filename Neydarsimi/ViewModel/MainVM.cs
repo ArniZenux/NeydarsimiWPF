@@ -14,13 +14,18 @@ namespace Neydarsimi.ViewModel
     class MainVM : ViewModelBase
     {
         #region "Variable" 
+        public string _Byrja_dagur;
+        public string _Endir_dagur; 
         public string _KlukkInnBox;
         public string _KlukkUtBox;
         public string _VettvangurComboBox;
+        public string _kennitala;
+
         public RelayCommand AddUser_CMD { get; set; }
         public RelayCommand ChangeUser_CMD { get; set; }
         public RelayCommand ChangeGSM_CMD { get; set; }
         public RelayCommand BookingProject_CMD { get; set; }
+        public RelayCommand SelectItemListbox_CMD { get; set; }
 
         private DataContextSingleton context = DataContextSingleton.Instance;
 
@@ -39,10 +44,44 @@ namespace Neydarsimi.ViewModel
                 if(_TulkurListi != value)
                 {
                     _TulkurListi = value;
+                    GetKennitala(_TulkurListi);
                     NotifyPropertyChanged("TulkurListi");
                 }
             }
         }
+
+        public string Byrja_dagur
+        {
+            get
+            {
+                return _Byrja_dagur;
+            }
+            set
+            {
+                if(_Byrja_dagur != value)
+                {
+                    _Byrja_dagur = value;
+                    NotifyPropertyChanged("Byrja_dagur");
+                }
+            }
+        }
+
+        public string Endir_dagur
+        {
+            get
+            {
+                return _Endir_dagur;
+            }
+            set
+            {
+                if (_Endir_dagur != value)
+                { 
+                    _Endir_dagur = value;
+                    NotifyPropertyChanged("Endir_dagur");
+                }
+            }
+        }
+
         public string KlukkInnBox
         {
             get
@@ -92,6 +131,40 @@ namespace Neydarsimi.ViewModel
             }
         }
 
+        public string Kennitala
+        {
+            get
+            {
+                return _kennitala;
+            }
+            set
+            {
+                if(_kennitala != value)
+                {
+                    _kennitala = value;
+                    NotifyPropertyChanged("Kennitala");
+                }
+            }
+        }
+
+        public string _selectUser;
+        public string SelectUser
+        {
+            get
+            {
+                return _selectUser;
+            }
+            set
+            {
+                if (_selectUser != value)
+                {
+                    _selectUser = value;
+                    GetKennitala(_selectUser); 
+                    NotifyPropertyChanged("SelectUser");
+                }
+            }
+        }
+
         private ObservableCollection<Tulkur> _tulkslisti;
         public ObservableCollection<Tulkur> Tulkslisti
         {
@@ -128,13 +201,47 @@ namespace Neydarsimi.ViewModel
             ChangeUser_CMD = new RelayCommand(ChangeUser_Fall);
             ChangeGSM_CMD = new RelayCommand(ChangeGSM_Fall); 
             BookingProject_CMD = new RelayCommand(BookingProject_Fall);
+            SelectItemListbox_CMD = new RelayCommand(GetKt);
 
             LoadNeydarsimi();
-            LoadTulkur(); 
+            LoadTulkur();
+            NullStilla();
         }
         #endregion
 
         #region "Functions"
+        public void NullStilla()
+        {
+            Kennitala = ""; 
+        }
+        public void GetKennitala(string _kennitala)
+        {
+            var query = from item in context.Context.Tulkurs
+                        where item.kt == _kennitala
+                        select item;
+
+            foreach(var str in query)
+            {
+                Kennitala = str.kt;
+            }
+        }
+
+        public void GetKt(object obj)
+        {
+            try
+            {
+                var item = (clsTulkur)obj;
+                if(item != null)
+                {
+                    Kennitala = item.kt;
+                    MessageBox.Show(Kennitala.ToString()); 
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
         public void AddUser_Fall(object obj)
         {
             NewUser new_user = new NewUser(); 
@@ -155,9 +262,56 @@ namespace Neydarsimi.ViewModel
 
         public void BookingProject_Fall(object obj)
         {
-            MessageBox.Show("Skrá");
-            KlukkInnBox = "";
-            KlukkUtBox = "";
+            if (Kennitala != string.Empty)
+            {
+                MessageBox.Show(Kennitala);
+
+                /*
+                if (Byrja_dagur != string.Empty && Endir_dagur != string.Empty && KlukkInnBox != string.Empty && KlukkUtBox != string.Empty && VettvangurComboBox != string.Empty)
+                {
+                    try
+                    {
+                        Vinna _vinna = new Vinna
+                        {
+                            kt = Kennitala,
+                            turn_off = 1
+                        };
+                        context.Context.Vinnas.Add(_vinna);
+                        context.Context.SaveChanges();
+
+                        Neydarsimi1 _neydarsimi = new Neydarsimi1
+                        {
+                            byrja = Byrja_dagur,
+                            endir = Endir_dagur,
+                            timi_byrja = KlukkInnBox,
+                            timi_endir = KlukkUtBox,
+                            tegund = VettvangurComboBox,
+
+                        };
+                        context.Context.Neydarsimi1.Add(_neydarsimi);
+                        context.Context.SaveChanges();
+
+                        MessageBox.Show("Neydarsími hafa vistaður.", "Tilkynning");
+
+                        //bæta við eventSystem.publish seinna 
+
+                    }
+                    catch (Exception ex)
+                    {
+                        string message = ex.Message;
+                        MessageBox.Show("Gagnavilla: ", ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Innsetningarbox eru tómar", "Tilkynning");
+                }
+                */
+            }
+            else
+            {
+                MessageBox.Show("Veldu túlkur", "Tilkynning"); 
+            }
         }
 
         //Hlaða lista af neyðarsíma túlka
