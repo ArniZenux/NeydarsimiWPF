@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Neydarsimi"
         mc:Ignorable="d"
         Title="Neyðarsími" Height="525" Width="900" ResizeMode="NoResize" Background="#B3B7B7">
@@ -59,32 +60,32 @@
 
             <GroupBox Grid.Column="0" Header="Skráning neyðarsíma" Height="380" Width="220" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,80,0,0"  >
                         <Grid>
-                             <ListView  x:Name="xListView" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="190" Height="140" ItemsSource="{Binding Tulkslisti}" SelectedItem="{Binding SelectUser}">
-                                <ListView.View>
-                                    <GridView>
-                                       <!-- <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="SelectionChanged">
-                                                    <i:InvokeCommandAction Command="{Binding SelectItemListbox_CMD}" CommandParameter="{Binding ElementName=xListView, Path=SelectedItem}"></i:InvokeCommandAction>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>-->
-                                            
-                                        <GridViewColumn Header="Nafn" Width="180" DisplayMemberBinding="{Binding nafn}"/>
+                             <ListView  x:Name="xListView" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="190" Height="140" ItemsSource="{Binding Path = Tulkslisti}" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                                <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="SelectionChanged">
+                                            <i:InvokeCommandAction Command="{Binding SelectItemListbox_CMD}" CommandParameter="{Binding ElementName=xListView, Path=SelectedItem}"/>
+                                        </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                    <ListView.View>
+                                        <GridView>
+                                          <GridViewColumn Header="Nafn" Width="180" DisplayMemberBinding="{Binding nafn}"/>
                                     </GridView>
                                 </ListView.View>
                             </ListView>
                             <Label Content="Frá" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,160,0,0"/>
-                            <DatePicker  Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80, 160, 0,0" SelectedDate="{Binding Byrja_dagur, StringFormat=dd/MM/yyy}"/>
-                            <!--<TextBlock Visibility="Visible" Text="{Binding Byrja_dagur, StringFormat=dd/MM/yyy}"/>-->
+                            <DatePicker Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80, 160, 0,0" SelectedDate="{Binding Byrja_dagur, StringFormat=dd/MM/yyy}"/>
                             <Label Content="Til" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,190,0,0"/>
-                            <DatePicker  Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80, 190, 0,0" SelectedDate="{Binding Endir_dagur}"/>
+                            <DatePicker  Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80, 190, 0,0" SelectedDate="{Binding Endir_dagur, StringFormat=dd/MM/yyy}"/>
                             <Label Content="Klukk - inn" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,220,0,0"/>
-                            <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,220,0,0" Width="120" Height="25" Text="{Binding KlukkInnBox}"/>
+                            <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,220,0,0" Width="120" Height="25" Text="{Binding KlukkInnBox, UpdateSourceTrigger=PropertyChanged}"/>
                             <Label Content="Klukk - út" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,250,0,0"/>
-                            <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,250,0,0" Width="120" Height="25" Text="{Binding KlukkUtBox}"/>
+                            <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,250,0,0" Width="120" Height="25" Text="{Binding KlukkUtBox, UpdateSourceTrigger=PropertyChanged}"/>
                             <Label Content="Vettvangur " VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,280,0,0"/>
-                            <ComboBox  Height="25" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,280,0,0" SelectedValue="{Binding VettvangurComboBox}" />
+                            <ComboBox  Height="25" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,280,0,0" ItemsSource="{Binding VettvangurComboBox}" SelectedValuePath="tegund" SelectedValue="{Binding VettvangurComboBox_old, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="tegund" />
+                            <xctk:TimePicker Margin="15,315,0,0" Height="20" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top"></xctk:TimePicker>
                             <Button Content="Skrá" Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="140,315,0,0" Command="{Binding BookingProject_CMD}"/>
-                        </Grid>
+                    
+                </Grid>
                 </GroupBox>
 
             <GroupBox Grid.Column="1" Header="Listi neyðarsíma" Height="455" Width="640" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0">

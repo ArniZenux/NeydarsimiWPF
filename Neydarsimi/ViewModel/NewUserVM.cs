@@ -12,7 +12,7 @@ namespace Neydarsimi.ViewModel
     class NewUserVM : ViewModelBase
     {
         #region "Variable"
-        public string _KennitalaBox;
+        public int _KennitalaBox;
         public string _FulltNafnBox;
         private DataContextSingleton context = DataContextSingleton.Instance;
 
@@ -20,7 +20,7 @@ namespace Neydarsimi.ViewModel
         #endregion
 
         #region "Svæði" 
-        public string KennitalaBox
+        public int KennitalaBox
         {
             get
             {
@@ -64,12 +64,12 @@ namespace Neydarsimi.ViewModel
         #region "Functions"
         public void NullStilla()
         {
-            KennitalaBox = "";
+            KennitalaBox = 0;
             FulltNafnBox = ""; 
         }
         public void Vista_New_User_Fall(object obj)
         {
-            if(KennitalaBox != string.Empty)
+            if(KennitalaBox != null)
             {
                 try
                 {
@@ -90,7 +90,7 @@ namespace Neydarsimi.ViewModel
                 catch (Exception ex)
                 {
                     string message = ex.Message;
-                    MessageBox.Show("Gagnavilla: " , ex.Message);
+                    MessageBox.Show("Gagnavilla : " + message , "Tilkynning");
                 }
 
             }

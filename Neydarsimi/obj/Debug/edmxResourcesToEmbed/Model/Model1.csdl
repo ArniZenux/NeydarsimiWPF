@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="Neydarsimi_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Neydarsimi1">
+<Schema Namespace="Neydarsimi1_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblNeydarsimi">
     <Key>
       <PropertyRef Name="nr" />
     </Key>
@@ -9,62 +9,36 @@
     <Property Name="endir" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="timi_byrja" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="timi_endir" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="tegund" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Vinna" Relationship="Self.FK_Vinna_Neydarsimi1" FromRole="Neydarsimi1" ToRole="Vinna" />
+    <Property Name="tegund" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="kt_fk" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Tulkur" Relationship="Self.FK_tblNeydarsimi_Tulkur" FromRole="tblNeydarsimi" ToRole="Tulkur" />
   </EntityType>
   <EntityType Name="Tulkur">
     <Key>
       <PropertyRef Name="kt" />
     </Key>
-    <Property Name="kt" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="nafn" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="Vinnas" Relationship="Self.FK_Vinna_Tulkur" FromRole="Tulkur" ToRole="Vinna" />
+    <Property Name="kt" Type="Int32" Nullable="false" />
+    <Property Name="nafn" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblNeydarsimis" Relationship="Self.FK_tblNeydarsimi_Tulkur" FromRole="Tulkur" ToRole="tblNeydarsimi" />
   </EntityType>
-  <EntityType Name="Vinna">
-    <Key>
-      <PropertyRef Name="nr" />
-    </Key>
-    <Property Name="nr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="kt" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="turn_off" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Neydarsimi1" Relationship="Self.FK_Vinna_Neydarsimi1" FromRole="Vinna" ToRole="Neydarsimi1" />
-    <NavigationProperty Name="Tulkur" Relationship="Self.FK_Vinna_Tulkur" FromRole="Vinna" ToRole="Tulkur" />
-  </EntityType>
-  <Association Name="FK_Vinna_Neydarsimi1">
-    <End Role="Neydarsimi1" Type="Self.Neydarsimi1" Multiplicity="1" />
-    <End Role="Vinna" Type="Self.Vinna" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Neydarsimi1">
-        <PropertyRef Name="nr" />
-      </Principal>
-      <Dependent Role="Vinna">
-        <PropertyRef Name="nr" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Vinna_Tulkur">
+  <Association Name="FK_tblNeydarsimi_Tulkur">
     <End Role="Tulkur" Type="Self.Tulkur" Multiplicity="1" />
-    <End Role="Vinna" Type="Self.Vinna" Multiplicity="*" />
+    <End Role="tblNeydarsimi" Type="Self.tblNeydarsimi" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tulkur">
         <PropertyRef Name="kt" />
       </Principal>
-      <Dependent Role="Vinna">
-        <PropertyRef Name="kt" />
+      <Dependent Role="tblNeydarsimi">
+        <PropertyRef Name="kt_fk" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Neydarsimi_DBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Neydarsimi1" EntityType="Self.Neydarsimi1" />
+  <EntityContainer Name="Neydarsimi1_dbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblNeydarsimis" EntityType="Self.tblNeydarsimi" />
     <EntitySet Name="Tulkurs" EntityType="Self.Tulkur" />
-    <EntitySet Name="Vinnas" EntityType="Self.Vinna" />
-    <AssociationSet Name="FK_Vinna_Neydarsimi1" Association="Self.FK_Vinna_Neydarsimi1">
-      <End Role="Neydarsimi1" EntitySet="Neydarsimi1" />
-      <End Role="Vinna" EntitySet="Vinnas" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Vinna_Tulkur" Association="Self.FK_Vinna_Tulkur">
+    <AssociationSet Name="FK_tblNeydarsimi_Tulkur" Association="Self.FK_tblNeydarsimi_Tulkur">
       <End Role="Tulkur" EntitySet="Tulkurs" />
-      <End Role="Vinna" EntitySet="Vinnas" />
+      <End Role="tblNeydarsimi" EntitySet="tblNeydarsimis" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

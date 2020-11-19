@@ -1,32 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Neydarsimi_DBModelStoreContainer" CdmEntityContainer="Neydarsimi_DBEntities">
-    <EntitySetMapping Name="Neydarsimi1">
-      <EntityTypeMapping TypeName="Neydarsimi_DBModel.Neydarsimi1">
-        <MappingFragment StoreEntitySet="Neydarsimi1">
+  <EntityContainerMapping StorageEntityContainer="Neydarsimi1_dbModelStoreContainer" CdmEntityContainer="Neydarsimi1_dbEntities">
+    <EntitySetMapping Name="tblNeydarsimis">
+      <EntityTypeMapping TypeName="Neydarsimi1_dbModel.tblNeydarsimi">
+        <MappingFragment StoreEntitySet="tblNeydarsimi">
           <ScalarProperty Name="nr" ColumnName="nr" />
           <ScalarProperty Name="byrja" ColumnName="byrja" />
           <ScalarProperty Name="endir" ColumnName="endir" />
           <ScalarProperty Name="timi_byrja" ColumnName="timi_byrja" />
           <ScalarProperty Name="timi_endir" ColumnName="timi_endir" />
           <ScalarProperty Name="tegund" ColumnName="tegund" />
+          <ScalarProperty Name="kt_fk" ColumnName="kt_fk" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Tulkurs">
-      <EntityTypeMapping TypeName="Neydarsimi_DBModel.Tulkur">
+      <EntityTypeMapping TypeName="Neydarsimi1_dbModel.Tulkur">
         <MappingFragment StoreEntitySet="Tulkur">
           <ScalarProperty Name="kt" ColumnName="kt" />
           <ScalarProperty Name="nafn" ColumnName="nafn" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Vinnas">
-      <EntityTypeMapping TypeName="Neydarsimi_DBModel.Vinna">
-        <MappingFragment StoreEntitySet="Vinna">
-          <ScalarProperty Name="nr" ColumnName="nr" />
-          <ScalarProperty Name="kt" ColumnName="kt" />
-          <ScalarProperty Name="turn_off" ColumnName="turn_off" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

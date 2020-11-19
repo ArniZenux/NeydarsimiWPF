@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Neydarsimi.Helper;
@@ -18,8 +19,8 @@ namespace Neydarsimi.ViewModel
         public string _Endir_dagur; 
         public string _KlukkInnBox;
         public string _KlukkUtBox;
-        public string _VettvangurComboBox;
-        public string _kennitala;
+        public string _VettvangurComboBox_old;
+        public int _kennitala;
 
         public RelayCommand AddUser_CMD { get; set; }
         public RelayCommand ChangeUser_CMD { get; set; }
@@ -44,7 +45,7 @@ namespace Neydarsimi.ViewModel
                 if(_TulkurListi != value)
                 {
                     _TulkurListi = value;
-                    GetKennitala(_TulkurListi);
+                    //GetKennitala(_TulkurListi);
                     NotifyPropertyChanged("TulkurListi");
                 }
             }
@@ -114,24 +115,23 @@ namespace Neydarsimi.ViewModel
             }
         }
 
-        public string VettvangurComboBox
+        public string VettvangurComboBox_old
         {
             get
             {
-                return _VettvangurComboBox;
+                return _VettvangurComboBox_old;
             }
             set
             {
-                if(_VettvangurComboBox != value)
+                if(_VettvangurComboBox_old != value)
                 {
-                    _VettvangurComboBox = value;
-
+                    _VettvangurComboBox_old = value;
                     NotifyPropertyChanged("VettvangurComboBox");
                 }
             }
         }
 
-        public string Kennitala
+        public int Kennitala
         {
             get
             {
@@ -159,7 +159,7 @@ namespace Neydarsimi.ViewModel
                 if (_selectUser != value)
                 {
                     _selectUser = value;
-                    GetKennitala(_selectUser); 
+                    //GetKennitala(_selectUser); 
                     NotifyPropertyChanged("SelectUser");
                 }
             }
@@ -192,8 +192,25 @@ namespace Neydarsimi.ViewModel
                 NotifyPropertyChanged("NeydarsimiData");
             }
         }
+
+        public ObservableCollection<clsVettvangur> _vettvangur;
+        public ObservableCollection<clsVettvangur> VettvangurComboBox
+        {
+            get
+            {
+                return _vettvangur;
+            }
+            set
+            {
+                if(_vettvangur != value)
+                {
+                    _vettvangur = value;
+                    NotifyPropertyChanged("VettvangurComboBox");
+                }
+            }
+        }
         #endregion
-        
+
         #region "Main VM"
         public MainVM()
         {
@@ -202,46 +219,42 @@ namespace Neydarsimi.ViewModel
             ChangeGSM_CMD = new RelayCommand(ChangeGSM_Fall); 
             BookingProject_CMD = new RelayCommand(BookingProject_Fall);
             SelectItemListbox_CMD = new RelayCommand(GetKt);
-
+        
             LoadNeydarsimi();
             LoadTulkur();
+            LoadVettvangur();
             NullStilla();
         }
         #endregion
 
         #region "Functions"
+
         public void NullStilla()
         {
-            Kennitala = ""; 
+            Kennitala = 0;
+            Byrja_dagur = "";
+            Endir_dagur = "";
+            KlukkInnBox = "";
+            KlukkUtBox = ""; 
         }
-        public void GetKennitala(string _kennitala)
-        {
-            var query = from item in context.Context.Tulkurs
-                        where item.kt == _kennitala
-                        select item;
-
-            foreach(var str in query)
-            {
-                Kennitala = str.kt;
-            }
-        }
-
+    
         public void GetKt(object obj)
         {
             try
             {
-                var item = (clsTulkur)obj;
+                var item = (Tulkur)obj;
                 if(item != null)
                 {
                     Kennitala = item.kt;
-                    MessageBox.Show(Kennitala.ToString()); 
+                    //MessageBox.Show(Kennitala.ToString()); 
                 }
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show("drasal"); 
             }
         }
+
         public void AddUser_Fall(object obj)
         {
             NewUser new_user = new NewUser(); 
@@ -262,55 +275,48 @@ namespace Neydarsimi.ViewModel
 
         public void BookingProject_Fall(object obj)
         {
-            if (Kennitala != string.Empty)
+            if (Kennitala != 0)
             {
-                MessageBox.Show(Kennitala);
+                MessageBox.Show(Kennitala.ToString()); 
 
-                /*
-                if (Byrja_dagur != string.Empty && Endir_dagur != string.Empty && KlukkInnBox != string.Empty && KlukkUtBox != string.Empty && VettvangurComboBox != string.Empty)
+                //if (Byrja_dagur != string.Empty && Endir_dagur != string.Empty && KlukkInnBox != string.Empty && KlukkUtBox != string.Empty && VettvangurComboBox_old != string.Empty)
+                if(Byrja_dagur != string.Empty)
                 {
                     try
                     {
-                        Vinna _vinna = new Vinna
-                        {
-                            kt = Kennitala,
-                            turn_off = 1
-                        };
-                        context.Context.Vinnas.Add(_vinna);
-                        context.Context.SaveChanges();
-
-                        Neydarsimi1 _neydarsimi = new Neydarsimi1
+                        tblNeydarsimi _neydarsimi = new tblNeydarsimi
                         {
                             byrja = Byrja_dagur,
                             endir = Endir_dagur,
                             timi_byrja = KlukkInnBox,
                             timi_endir = KlukkUtBox,
-                            tegund = VettvangurComboBox,
-
+                            tegund = VettvangurComboBox_old,
+                            kt_fk = Kennitala
                         };
-                        context.Context.Neydarsimi1.Add(_neydarsimi);
+
+                        context.Context.tblNeydarsimis.Add(_neydarsimi);
                         context.Context.SaveChanges();
+                        
+                        MessageBox.Show("Neydarsími hafa vistaður", "Tilkynning");
 
-                        MessageBox.Show("Neydarsími hafa vistaður.", "Tilkynning");
-
+                        //LoadNeydarsimi();
                         //bæta við eventSystem.publish seinna 
 
                     }
                     catch (Exception ex)
                     {
                         string message = ex.Message;
-                        MessageBox.Show("Gagnavilla: ", ex.Message);
+                        MessageBox.Show("Gagnavilla : " + message, "Tilkynning");
                     }
                 }
                 else
                 {
                     MessageBox.Show("Innsetningarbox eru tómar", "Tilkynning");
                 }
-                */
             }
             else
             {
-                MessageBox.Show("Veldu túlkur", "Tilkynning"); 
+                MessageBox.Show("Vinsamlegt að velja túlk", "Tilkynning"); 
             }
         }
 
@@ -318,18 +324,17 @@ namespace Neydarsimi.ViewModel
         public void LoadNeydarsimi()
         {
             var query = from d1 in context.Context.Tulkurs
-                        from d2 in context.Context.Vinnas
-                        from d3 in context.Context.Neydarsimi1
-                        where d1.kt == d2.kt && d2.nr == d3.nr
+                        from d2 in context.Context.tblNeydarsimis
+                        where d1.kt == d2.kt_fk
                         select new
                         {
-                            d3.nr,
+                            d2.nr,
                             d1.nafn,
-                            d3.timi_byrja,
-                            d3.timi_endir,
-                            d3.byrja,
-                            d3.endir,
-                            d3.tegund
+                            d2.timi_byrja,
+                            d2.timi_endir,
+                            d2.byrja,
+                            d2.endir,
+                            d2.tegund
                         };
             foreach (var str in query)
             {
@@ -352,6 +357,15 @@ namespace Neydarsimi.ViewModel
             var query = from d1 in context.Context.Tulkurs
                         select d1;
             _tulkslisti = new ObservableCollection<Tulkur>(query);
+        }
+
+        public void LoadVettvangur()
+        {
+            _vettvangur = new ObservableCollection<clsVettvangur>()
+            {
+                new clsVettvangur { tegund = "Þjóðarhátíð"  },
+                new clsVettvangur { tegund = "Aðdangsdagur" }
+            };
         }
         #endregion
     }

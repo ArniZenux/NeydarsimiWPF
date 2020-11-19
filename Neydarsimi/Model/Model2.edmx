@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Neydarsimi_DB1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Neydarsimi">
+          <Key>
+            <PropertyRef Name="nr" />
+          </Key>
+          <Property Name="nr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="byrja" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="endir" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="timi_byrja" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="timi_endir" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tegund" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="kt_fk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tulkur">
+          <Key>
+            <PropertyRef Name="kt" />
+          </Key>
+          <Property Name="kt" Type="int" Nullable="false" />
+          <Property Name="nafn" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Neydarsimi_Tulkur">
+          <End Role="Tulkur" Type="Self.Tulkur" Multiplicity="1" />
+          <End Role="Neydarsimi" Type="Self.Neydarsimi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tulkur">
+              <PropertyRef Name="kt" />
+            </Principal>
+            <Dependent Role="Neydarsimi">
+              <PropertyRef Name="kt_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Neydarsimi_DB1ModelStoreContainer">
+          <EntitySet Name="Neydarsimi" EntityType="Self.Neydarsimi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tulkur" EntityType="Self.Tulkur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Neydarsimi_Tulkur" Association="Self.FK_Neydarsimi_Tulkur">
+            <End Role="Tulkur" EntitySet="Tulkur" />
+            <End Role="Neydarsimi" EntitySet="Neydarsimi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Neydarsimi_DB1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Neydarsimi">
+          <Key>
+            <PropertyRef Name="nr" />
+          </Key>
+          <Property Name="nr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="byrja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="endir" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="timi_byrja" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="timi_endir" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tegund" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="kt_fk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tulkur" Relationship="Self.FK_Neydarsimi_Tulkur" FromRole="Neydarsimi" ToRole="Tulkur" />
+        </EntityType>
+        <EntityType Name="Tulkur">
+          <Key>
+            <PropertyRef Name="kt" />
+          </Key>
+          <Property Name="kt" Type="Int32" Nullable="false" />
+          <Property Name="nafn" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Neydarsimis" Relationship="Self.FK_Neydarsimi_Tulkur" FromRole="Tulkur" ToRole="Neydarsimi" />
+        </EntityType>
+        <Association Name="FK_Neydarsimi_Tulkur">
+          <End Role="Tulkur" Type="Self.Tulkur" Multiplicity="1" />
+          <End Role="Neydarsimi" Type="Self.Neydarsimi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tulkur">
+              <PropertyRef Name="kt" />
+            </Principal>
+            <Dependent Role="Neydarsimi">
+              <PropertyRef Name="kt_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Neydarsimi_DB1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Neydarsimis" EntityType="Self.Neydarsimi" />
+          <EntitySet Name="Tulkurs" EntityType="Self.Tulkur" />
+          <AssociationSet Name="FK_Neydarsimi_Tulkur" Association="Self.FK_Neydarsimi_Tulkur">
+            <End Role="Tulkur" EntitySet="Tulkurs" />
+            <End Role="Neydarsimi" EntitySet="Neydarsimis" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Neydarsimi_DB1ModelStoreContainer" CdmEntityContainer="Neydarsimi_DB1Entities">
+          <EntitySetMapping Name="Neydarsimis">
+            <EntityTypeMapping TypeName="Neydarsimi_DB1Model.Neydarsimi">
+              <MappingFragment StoreEntitySet="Neydarsimi">
+                <ScalarProperty Name="nr" ColumnName="nr" />
+                <ScalarProperty Name="byrja" ColumnName="byrja" />
+                <ScalarProperty Name="endir" ColumnName="endir" />
+                <ScalarProperty Name="timi_byrja" ColumnName="timi_byrja" />
+                <ScalarProperty Name="timi_endir" ColumnName="timi_endir" />
+                <ScalarProperty Name="tegund" ColumnName="tegund" />
+                <ScalarProperty Name="kt_fk" ColumnName="kt_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tulkurs">
+            <EntityTypeMapping TypeName="Neydarsimi_DB1Model.Tulkur">
+              <MappingFragment StoreEntitySet="Tulkur">
+                <ScalarProperty Name="kt" ColumnName="kt" />
+                <ScalarProperty Name="nafn" ColumnName="nafn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

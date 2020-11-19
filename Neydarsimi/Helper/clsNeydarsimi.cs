@@ -15,6 +15,6 @@ namespace Neydarsimi.Helper
         public string timi_byrja { get; set; }
         public string timi_endir { get; set; }
         public string tegund { get; set; }
-
+        public int kt_fk { get; set; }
     }
 }

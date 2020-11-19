@@ -8,7 +8,7 @@ namespace Neydarsimi.Helper
 {
     class clsTulkur
     {
-        public string kt { get; set; }
+        public int kt { get; set; }
         public string nafn { get; set; }
     }
 }

@@ -17,13 +17,13 @@ namespace Neydarsimi.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Tulkur()
         {
-            this.Vinnas = new HashSet<Vinna>();
+            this.tblNeydarsimis = new HashSet<tblNeydarsimi>();
         }
     
-        public string kt { get; set; }
+        public int kt { get; set; }
         public string nafn { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vinna> Vinnas { get; set; }
+        public virtual ICollection<tblNeydarsimi> tblNeydarsimis { get; set; }
     }
 }

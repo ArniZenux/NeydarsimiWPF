@@ -13,7 +13,7 @@ namespace Neydarsimi.ViewModel
     class ChangeUserVM : ViewModelBase
     {
         #region "Variable"
-        public string _KennitalaBox;
+        public int _KennitalaBox;
         public string _FulltNafnBox;
         public RelayCommand Change_user_CMD { get; set; }
         public RelayCommand SelectItemListbox_CMD { get; set; }
@@ -23,7 +23,7 @@ namespace Neydarsimi.ViewModel
         #endregion
 
         #region "svæði" 
-        public string KennitalaBox
+        public int KennitalaBox
         {
             get
             {
@@ -75,7 +75,7 @@ namespace Neydarsimi.ViewModel
             Change_user_CMD = new RelayCommand(Change_user_Fall);
             SelectItemListbox_CMD = new RelayCommand(SelectItemListbox_Fall);
             LoadTulkur();
-            KennitalaBox = string.Empty;
+            KennitalaBox = 0;
             FulltNafnBox = ""; 
         }
         #endregion
@@ -91,13 +91,13 @@ namespace Neydarsimi.ViewModel
 
         public void NullStilla()
         {
-            KennitalaBox = "";
+            KennitalaBox = 0;
             FulltNafnBox = ""; 
         }
 
         public void Change_user_Fall(object obj)
         {
-            if (KennitalaBox != string.Empty)
+            if (KennitalaBox != 0)
             {
                 try
                 {

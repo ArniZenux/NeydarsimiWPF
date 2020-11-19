@@ -12,7 +12,7 @@ namespace Neydarsimi.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Neydarsimi1
+    public partial class tblNeydarsimi
     {
         public int nr { get; set; }
         public string byrja { get; set; }
@@ -20,7 +20,8 @@ namespace Neydarsimi.Model
         public string timi_byrja { get; set; }
         public string timi_endir { get; set; }
         public string tegund { get; set; }
+        public int kt_fk { get; set; }
     
-        public virtual Vinna Vinna { get; set; }
+        public virtual Tulkur Tulkur { get; set; }
     }
 }

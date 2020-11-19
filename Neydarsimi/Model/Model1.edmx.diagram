@@ -4,12 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cfaae4dc2ad34da9b45de59641b4a96d" Name="Diagram1">
-        <EntityTypeShape EntityType="Neydarsimi_DBModel.Neydarsimi1" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Neydarsimi_DBModel.Tulkur" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Neydarsimi_DBModel.Vinna" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <AssociationConnector Association="Neydarsimi_DBModel.FK_Vinna_Neydarsimi1" ManuallyRouted="false" />
-        <AssociationConnector Association="Neydarsimi_DBModel.FK_Vinna_Tulkur" ManuallyRouted="false" />
+      <Diagram DiagramId="d6459b975c894aceb7ffa3f1ae5b01eb" Name="Diagram1">
+        <EntityTypeShape EntityType="Neydarsimi1_dbModel.tblNeydarsimi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Neydarsimi1_dbModel.Tulkur" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="Neydarsimi1_dbModel.FK_tblNeydarsimi_Tulkur" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
