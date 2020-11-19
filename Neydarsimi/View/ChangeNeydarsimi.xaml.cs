@@ -25,5 +25,10 @@ namespace Neydarsimi.View
             InitializeComponent();
             DataContext = new ChangeNeydarsimiVM(); 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -67,9 +67,10 @@ namespace Neydarsimi.ViewModel
             KennitalaBox = 0;
             FulltNafnBox = ""; 
         }
+
         public void Vista_New_User_Fall(object obj)
         {
-            if(KennitalaBox != null)
+            if(KennitalaBox != 0 && FulltNafnBox != string.Empty)
             {
                 try
                 {
@@ -82,7 +83,9 @@ namespace Neydarsimi.ViewModel
                     context.Context.Tulkurs.Add(_tulkur);
                     context.Context.SaveChanges();
 
-                    MessageBox.Show("Nýr tulkur vistaður.", "Tilkynning");
+                    MessageBox.Show("Nýr túlkur vistaður.", "Tilkynning");
+
+                    NullStilla();
 
                     //bæta við eventSystem.publish seinna 
 
@@ -92,7 +95,6 @@ namespace Neydarsimi.ViewModel
                     string message = ex.Message;
                     MessageBox.Show("Gagnavilla : " + message , "Tilkynning");
                 }
-
             }
             else
             {

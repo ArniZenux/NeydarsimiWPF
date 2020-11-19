@@ -33,19 +33,20 @@
                 <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,370,0,0" Width="120" Height="25" Text="{Binding VettvangurBox}"/>
                 <Label Content="Nýr vettvangur " VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,400,0,0"/>
                 <ComboBox  Height="25" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,400,0,0" SelectedValue="{Binding VettvangurComboBox}" />
-                <Button Content="Breyta" Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="167,430,0,0" Command="{Binding ChangeNeydarsimi_CMD}"/>
+                <Button Content="Breyta" Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="105,430,0,0" Command="{Binding ChangeNeydarsimi_CMD}"/>
+                <Button Content="Loka" Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="170,430,0,0" Click="Button_Click" />
             </Grid>
         </GroupBox>
 
         <GroupBox Grid.Column="1" Header="Listi neyðarsíma" Height="490" Width="625" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0" Grid.RowSpan="2">
-            <DataGrid x:Name="xListView" Width="600" Height="455">
+            <DataGrid x:Name="xListView" Width="600" Height="455" ItemsSource="{Binding Path=NeydarsimiData}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="Nafn" Header="Nafn" Width="130" DisplayIndex="0"/>
-                    <DataGridTextColumn x:Name="Frá" Header="Frá" Width="100" DisplayIndex="1"/>
-                    <DataGridTextColumn x:Name="Til" Header="Til" Width="100" DisplayIndex="2"/>
-                    <DataGridTextColumn x:Name="Klukka_inn" Header="Kl" Width="60" DisplayIndex="3"/>
-                    <DataGridTextColumn x:Name="Klukkan_ut" Header="Kl" Width="60" DisplayIndex="4"/>
-                    <DataGridTextColumn x:Name="Vettvangur" Header="Vettvangur" Width="134" DisplayIndex="5"/>
+                    <DataGridTextColumn x:Name="Nafn" Header="Nafn" Width="130" Binding="{Binding nafn}" DisplayIndex="0"/>
+                    <DataGridTextColumn x:Name="Frá" Header="Frá" Width="100" Binding="{Binding byrja}" DisplayIndex="1"/>
+                    <DataGridTextColumn x:Name="Til" Header="Til" Width="100" Binding="{Binding endir}" DisplayIndex="2"/>
+                    <DataGridTextColumn x:Name="Klukka_inn" Header="Kl" Width="60" Binding="{Binding timi_byrja}" DisplayIndex="3"/>
+                    <DataGridTextColumn x:Name="Klukkan_ut" Header="Kl" Width="60" Binding="{Binding timi_endir}" DisplayIndex="4"/>
+                    <DataGridTextColumn x:Name="Vettvangur" Header="Vettvangur" Width="160" Binding="{Binding tegund}" DisplayIndex="5"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

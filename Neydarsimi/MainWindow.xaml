@@ -82,7 +82,7 @@
                             <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,250,0,0" Width="120" Height="25" Text="{Binding KlukkUtBox, UpdateSourceTrigger=PropertyChanged}"/>
                             <Label Content="Vettvangur " VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,280,0,0"/>
                             <ComboBox  Height="25" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,280,0,0" ItemsSource="{Binding VettvangurComboBox}" SelectedValuePath="tegund" SelectedValue="{Binding VettvangurComboBox_old, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="tegund" />
-                            <xctk:TimePicker Margin="15,315,0,0" Height="20" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top"></xctk:TimePicker>
+                            <!-- <xctk:TimePicker Margin="15,315,0,0" Height="20" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top"></xctk:TimePicker> -->
                             <Button Content="Skrá" Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="140,315,0,0" Command="{Binding BookingProject_CMD}"/>
                     
                 </Grid>

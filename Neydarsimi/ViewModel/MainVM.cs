@@ -219,7 +219,9 @@ namespace Neydarsimi.ViewModel
             ChangeGSM_CMD = new RelayCommand(ChangeGSM_Fall); 
             BookingProject_CMD = new RelayCommand(BookingProject_Fall);
             SelectItemListbox_CMD = new RelayCommand(GetKt);
-        
+            
+            _neydarsimiData = new ObservableCollection<clsNeydarsimi>();
+
             LoadNeydarsimi();
             LoadTulkur();
             LoadVettvangur();
@@ -251,7 +253,8 @@ namespace Neydarsimi.ViewModel
             }
             catch (Exception ex)
             {
-                MessageBox.Show("drasal"); 
+                string message = ex.Message;
+                //MessageBox.Show("drasal"); 
             }
         }
 
@@ -277,10 +280,9 @@ namespace Neydarsimi.ViewModel
         {
             if (Kennitala != 0)
             {
-                MessageBox.Show(Kennitala.ToString()); 
+                //MessageBox.Show(Kennitala.ToString()); 
 
-                //if (Byrja_dagur != string.Empty && Endir_dagur != string.Empty && KlukkInnBox != string.Empty && KlukkUtBox != string.Empty && VettvangurComboBox_old != string.Empty)
-                if(Byrja_dagur != string.Empty)
+                if(Byrja_dagur != string.Empty && Endir_dagur != string.Empty && KlukkInnBox != string.Empty && KlukkUtBox != string.Empty && VettvangurComboBox_old != string.Empty)
                 {
                     try
                     {
@@ -299,7 +301,10 @@ namespace Neydarsimi.ViewModel
                         
                         MessageBox.Show("Neydarsími hafa vistaður", "Tilkynning");
 
-                        //LoadNeydarsimi();
+                        LoadNeydarsimi();
+                        
+                        NullStilla();
+
                         //bæta við eventSystem.publish seinna 
 
                     }
@@ -323,6 +328,8 @@ namespace Neydarsimi.ViewModel
         //Hlaða lista af neyðarsíma túlka
         public void LoadNeydarsimi()
         {
+            _neydarsimiData.Clear(); 
+
             var query = from d1 in context.Context.Tulkurs
                         from d2 in context.Context.tblNeydarsimis
                         where d1.kt == d2.kt_fk
@@ -336,6 +343,7 @@ namespace Neydarsimi.ViewModel
                             d2.endir,
                             d2.tegund
                         };
+
             foreach (var str in query)
             {
                 _neydarsimiData.Add(new clsNeydarsimi()

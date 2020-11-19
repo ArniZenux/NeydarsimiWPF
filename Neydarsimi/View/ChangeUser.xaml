@@ -9,9 +9,9 @@
         Title="Breyta túlk" Height="320" Width="255" ResizeMode="NoResize" Background="#B3B7B7">
     <Grid>
 
-        <ListView  x:Name="xListView" SelectedItem="{Binding SelectItemListbox_CMD}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="220" Height="165" ItemsSource="{Binding Tulkslisti}">
+        <ListView  x:Name="xListView" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="220" Height="165" ItemsSource="{Binding Tulkslisti}">
             <i:Interaction.Triggers>
-                <i:EventTrigger>
+                <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SelectItemListbox_CMD}" CommandParameter="{Binding ElementName=xListView, Path=SelectedItem}"></i:InvokeCommandAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
@@ -26,7 +26,7 @@
         <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,180,0,0" Width="150" Height="25" Text="{Binding KennitalaBox, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="Fullt nafn" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,210,0,0"/>
         <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,210,0,0" Width="150" Height="25" Text="{Binding FulltNafnBox, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Skrá" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="125,245,0,0" Command="{Binding Change_user_CMD}"/>
+        <Button Content="Breyta" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="125,245,0,0" Command="{Binding Change_user_CMD}"/>
         <Button Content="Loka" Height="25" Width="50" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="180,245,0,0" Click="Button_Click"/>
     </Grid>
 </Window>

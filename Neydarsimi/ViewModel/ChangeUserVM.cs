@@ -55,8 +55,8 @@ namespace Neydarsimi.ViewModel
             }
         }
 
-        private ObservableCollection<Tulkur> _tulkslisti; 
-        public ObservableCollection<Tulkur> Tulkslisti
+        private ObservableCollection<clsTulkur> _tulkslisti; 
+        public ObservableCollection<clsTulkur> Tulkslisti
         {
             get
             {
@@ -64,7 +64,11 @@ namespace Neydarsimi.ViewModel
             }
             set
             {
-                _tulkslisti = value; 
+                if(_tulkslisti != value)
+                {
+                    _tulkslisti = value;
+                    NotifyPropertyChanged("Tulkslisti");
+                }
             }
         }
         #endregion 
@@ -74,6 +78,9 @@ namespace Neydarsimi.ViewModel
         {
             Change_user_CMD = new RelayCommand(Change_user_Fall);
             SelectItemListbox_CMD = new RelayCommand(SelectItemListbox_Fall);
+            
+            _tulkslisti = new ObservableCollection<clsTulkur>();
+
             LoadTulkur();
             KennitalaBox = 0;
             FulltNafnBox = ""; 
@@ -84,9 +91,24 @@ namespace Neydarsimi.ViewModel
         //Hlaða list af túlkum. 
         public void LoadTulkur()
         {
+            Tulkslisti.Clear();
+
             var query = from d1 in context.Context.Tulkurs
-                        select d1;
-            _tulkslisti = new ObservableCollection<Tulkur>(query); 
+                        select new
+                        {
+                            d1.kt,
+                            d1.nafn
+                        };
+            foreach( var str in query)
+            {
+                _tulkslisti.Add(new clsTulkur()
+                {
+                    kt = str.kt,
+                    nafn = str.nafn
+                });
+            }
+
+            //_tulkslisti = new ObservableCollection<clsTulkur>(query); 
         }
 
         public void NullStilla()
@@ -97,7 +119,7 @@ namespace Neydarsimi.ViewModel
 
         public void Change_user_Fall(object obj)
         {
-            if (KennitalaBox != 0)
+            if (KennitalaBox != 0 && FulltNafnBox != string.Empty)
             {
                 try
                 {
@@ -109,7 +131,10 @@ namespace Neydarsimi.ViewModel
 
                     context.Context.SaveChanges();
 
+                    MessageBox.Show("Túlkur endurbreytaður.", "Tilkynning");
+
                     LoadTulkur();
+
                     NullStilla(); 
                 }
                 catch (Exception ex)
@@ -117,7 +142,6 @@ namespace Neydarsimi.ViewModel
                     string text = ex.Message;
                     MessageBox.Show("Gagnavilla..");
                 }
-
             }
             else
             {
