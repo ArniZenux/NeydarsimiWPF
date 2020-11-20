@@ -248,13 +248,11 @@ namespace Neydarsimi.ViewModel
                 if(item != null)
                 {
                     Kennitala = item.kt;
-                    //MessageBox.Show(Kennitala.ToString()); 
                 }
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
-                //MessageBox.Show("drasal"); 
             }
         }
 
