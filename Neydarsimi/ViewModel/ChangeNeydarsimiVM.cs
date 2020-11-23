@@ -19,6 +19,8 @@ namespace Neydarsimi.ViewModel
         public int _number;
         public string _TulkurBox;
         public string _Byrja_dagur;
+        public string _Nyr_Byrja_dagur;
+        public string _Nyr_Endir_dagur;
         public string _Endir_dagur;
         public string _KlukkInnBox;
         public string _KlukkUtBox;
@@ -83,7 +85,24 @@ namespace Neydarsimi.ViewModel
                 }
             }
         }
-  
+
+        public string Nyr_Byrja_dagur
+        {
+            get
+            {
+                return _Nyr_Byrja_dagur;
+            }
+            set
+            {
+                if (_Nyr_Byrja_dagur != value)
+                {
+                    _Nyr_Byrja_dagur = value;
+                    Byrja_dagur = Nyr_Byrja_dagur;
+                    NotifyPropertyChanged("Nyr_Byrja_dagur");
+                }
+            }
+        }
+
         public string Byrja_dagur
         {
             get
@@ -97,6 +116,23 @@ namespace Neydarsimi.ViewModel
                     _Byrja_dagur = value;
                     NotifyPropertyChanged("Byrja_dagur");
                 }   
+            }
+        }
+
+        public string Nyr_Endir_dagur
+        {
+            get
+            {
+                return _Nyr_Endir_dagur;
+            }
+            set
+            {
+                if(_Nyr_Endir_dagur != value)
+                {
+                    _Nyr_Endir_dagur = value;
+                    Endir_dagur = Nyr_Endir_dagur;
+                    NotifyPropertyChanged("Nyr_Endir_dagur");
+                }
             }
         }
 
@@ -160,6 +196,7 @@ namespace Neydarsimi.ViewModel
                 if (_VettvangurComboBox_old != value)
                 {
                     _VettvangurComboBox_old = value;
+                    VettvangurBox = VettvangurComboBox_old;
                     NotifyPropertyChanged("VettvangurComboBox_old");
                 }
             }
@@ -306,9 +343,11 @@ namespace Neydarsimi.ViewModel
         {
             Number = 0; 
             KennitalaBox = 0;
-            TulkurBox = ""; 
+            TulkurBox = "";
+            Nyr_Byrja_dagur = "";
             Byrja_dagur = "";
             Endir_dagur = "";
+            Nyr_Endir_dagur = ""; 
             KlukkInnBox = "";
             KlukkUtBox = "";
             VettvangurBox = "";
@@ -338,25 +377,13 @@ namespace Neydarsimi.ViewModel
                     KlukkUtBox = item.timi_endir;
                     VettvangurBox = item.tegund;
                     KennitalaBox = item.kt_fk;
-
-                   // GetTulkur();
                 }
             }
             catch
             {
             }
         }
-
-        /*public void GetTulkur()
-        {
-            var query = from d1 in context.Context.Tulkurs
-                        where d1.nafn == TulkurBox
-                        select new
-                        {
-                            KennitalaBox = d1.kt
-                        };                    
-        }*/
-
+     
         public void SelectTulkur_Fall(object obj)
         {
             try
@@ -374,53 +401,55 @@ namespace Neydarsimi.ViewModel
 
         public void ChangeNeydarsimi_Fall(object obj)
         {
-            string message = "Túlkur: " + TulkurBox + "\n" + "Byrja: " + Byrja_dagur + "\n" + "Endir: " + Endir_dagur + "\n" + "Inn: " + KlukkInnBox + "\n" + "Út: " + KlukkUtBox + "\n" + "Vettvangur: " + VettvangurBox + "\n";
 
-            DialogResult dialogResult = MessageBox.Show(message, "Er rétt upplýsingar?", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                MessageBox.Show("Já");
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                MessageBox.Show("Nei");
-            }
-
-
-            /*
             if (Number != 0 && KennitalaBox != 0 && TulkurBox != string.Empty && Byrja_dagur != string.Empty && Endir_dagur != string.Empty && KlukkInnBox != string.Empty && KlukkUtBox != string.Empty && VettvangurBox != string.Empty)
             {
-                try
+                string message = "Túlkur: " + TulkurBox + "\n" + "Byrja: " + Byrja_dagur + "\n" + "Endir: " + Endir_dagur + "\n" + "Inn: " + KlukkInnBox + "\n" + "Út: " + KlukkUtBox + "\n" + "Vettvangur: " + VettvangurBox + "\n";
+
+                DialogResult dialogResult = MessageBox.Show(message, "Er breyting rétt upplýsingar?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    tblNeydarsimi _neydarsimiUpdate = ( from d1 in context.Context.tblNeydarsimis
-                                                        where d1.nr == Number
-                                                        select d1).First();
+                    try
+                    {
+                        tblNeydarsimi _neydarsimiUpdate = (from d1 in context.Context.tblNeydarsimis
+                                                           where d1.nr == Number
+                                                           select d1).First();
 
-                    _neydarsimiUpdate.byrja = Byrja_dagur;
-                    _neydarsimiUpdate.endir = Endir_dagur;
-                    _neydarsimiUpdate.timi_byrja = KlukkInnBox;
-                    _neydarsimiUpdate.timi_endir = KlukkUtBox;
-                    _neydarsimiUpdate.tegund = VettvangurBox;
-                    _neydarsimiUpdate.kt_fk = KennitalaBox;
-                                      
-                    context.Context.SaveChanges();
+                        _neydarsimiUpdate.byrja = Byrja_dagur;
+                        _neydarsimiUpdate.endir = Endir_dagur;
+                        _neydarsimiUpdate.timi_byrja = KlukkInnBox;
+                        _neydarsimiUpdate.timi_endir = KlukkUtBox;
+                        _neydarsimiUpdate.tegund = VettvangurBox;
+                        _neydarsimiUpdate.kt_fk = KennitalaBox;
 
-                    MessageBox.Show("Neyðarsími túlks endurbreytaður.", "Tilkynning");
+                        context.Context.SaveChanges();
 
-                    LoadNeydarsimi();
-                    NullStilla();
+                        MessageBox.Show("Neyðarsími túlks uppfærður", "Tilkynning");
+
+                        LoadNeydarsimi();
+                        NullStilla();
+
+                        EventSystem.Publish<BasicChange>(new BasicChange
+                        {
+                            basicData = Basic.update_neydarsimi
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        string text = ex.Message;
+                        MessageBox.Show("Gagnavilla..");
+                    }
                 }
-                catch (Exception ex)
+                else if (dialogResult == DialogResult.No)
                 {
-                    string text = ex.Message;
-                    MessageBox.Show("Gagnavilla..");
+                    MessageBox.Show("Breytingar hefur ekki verið uppfærð","Tilkynning");
+                    NullStilla();
                 }
             }
             else
             {
                 MessageBox.Show("Innsetningarbox eru tómar", "Tilkynning");
             }
-            */
         }
     }
 }

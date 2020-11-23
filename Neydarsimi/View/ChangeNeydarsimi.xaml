@@ -33,17 +33,17 @@
                 <Label Content="(Nýja) Frá" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,190,0,0"/>
                 <DatePicker  Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110, 190, 0,0" SelectedDate="{Binding Nyr_Byrja_dagur, StringFormat=dd/MM/yyy}" />
                 <Label Content="Frá" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,220,0,0"/>
-                <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,220,0,0" Width="120" Height="25" Text="{Binding Byrja_dagur}"/>
+                <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,220,0,0" Width="120" IsReadOnly="True" Height="25" Text="{Binding Byrja_dagur}"/>
                 <Label Content="(Nýja) Til" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,250,0,0"/>
                 <DatePicker  Height="25" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110, 250, 0,0" SelectedDate="{Binding Nyr_Endir_dagur, StringFormat=dd/MM/yyy}"/>
                 <Label Content="Til" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,280,0,0"/>
-                <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,280,0,0" Width="120" Height="25" Text="{Binding Endir_dagur}"/>
+                <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,280,0,0" Width="120" IsReadOnly="True" Height="25" Text="{Binding Endir_dagur}"/>
                 <Label Content="Klukk - inn" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,310,0,0"/>
                 <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,310,0,0" Width="120" Height="25" Text="{Binding KlukkInnBox}"/>
                 <Label Content="Klukk - út" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,340,0,0"/>
                 <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,340,0,0" Width="120" Height="25" Text="{Binding KlukkUtBox}"/>
                 <Label Content="Vettvangur " VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,370,0,0"/>
-                <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,370,0,0" Width="120" Height="25" Text="{Binding VettvangurBox}"/>
+                <TextBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,370,0,0" IsReadOnly="True" Width="120" Height="25" Text="{Binding VettvangurBox}"/>
                 <Label Content="Nýr vettvangur " VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,400,0,0"/>
                 <ComboBox  Height="25" Width="120" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="110,400,0,0"  ItemsSource="{Binding VettvangurComboBox}" SelectedValuePath="tegund" SelectedValue="{Binding VettvangurComboBox_old, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="tegund"/>
                 <Button Content="Breyta" Height="25" Width="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="105,430,0,0" Command="{Binding ChangeNeydarsimi_CMD}"/>

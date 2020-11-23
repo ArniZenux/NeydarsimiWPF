@@ -274,6 +274,11 @@ namespace Neydarsimi.ViewModel
             change_gsm.Show(); 
         }
 
+        public void ChangeBasis(BasicChange msg)
+        {
+            LoadNeydarsimi(); 
+        }
+
         public void BookingProject_Fall(object obj)
         {
             if (Kennitala != 0)

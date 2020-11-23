@@ -97,3 +97,12 @@ C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
 C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Prism.dll
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Prism.Wpf.dll
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Microsoft.Xaml.Behaviors.xml
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Prism.pdb
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Prism.xml
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Prism.Wpf.pdb
+C:\Zoz\NeydarsimiWPF\Neydarsimi\bin\Debug\Prism.Wpf.xml
