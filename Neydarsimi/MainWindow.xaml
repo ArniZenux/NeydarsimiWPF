@@ -7,7 +7,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Neydarsimi"
         mc:Ignorable="d"
-        Title="Neyðarsími" Height="525" Width="900" ResizeMode="NoResize" Background="#B3B7B7">
+        Title="Neyðarsími túlka - Útgáfunúmer 1.0.0" Height="525" Width="900" ResizeMode="NoResize" Background="#B3B7B7">
     <DockPanel>
         <Menu DockPanel.Dock="Top" FontSize="14">
             <MenuItem Header="Skráning">
@@ -37,13 +37,7 @@
                 </MenuItem>
                 
             </MenuItem>
-            <MenuItem Header="Útgáfa">
-                <MenuItem Header="Um Neyðarsími">
-                    <MenuItem.Icon>
-                        <Image Source="img\about.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
+           
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -58,7 +52,7 @@
                         </Grid>
                 </GroupBox>
 
-            <GroupBox Grid.Column="0" Header="Skráning neyðarsíma" Height="380" Width="220" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,80,0,0"  >
+            <GroupBox Grid.Column="0" Header="Skrá neyðarsíma túlka" Height="380" Width="220" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,80,0,0"  >
                         <Grid>
                              <ListView  x:Name="xListView" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,5,0,0" Width="190" Height="140" ItemsSource="{Binding Path = Tulkslisti}" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                                 <i:Interaction.Triggers>
@@ -88,7 +82,7 @@
                 </Grid>
                 </GroupBox>
 
-            <GroupBox Grid.Column="1" Header="Listi neyðarsíma" Height="455" Width="640" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0">
+            <GroupBox Grid.Column="1" Header="Listi neyðarsíma túlka" Height="455" Width="640" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,5,0,0">
                 <DataGrid x:Name="xDataGrid" Width="620" Height="420" ItemsSource="{Binding Path=NeydarsimiData}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn x:Name="Nafn" Header="Nafn" Width="130" Binding="{Binding nafn}" DisplayIndex="0"/>

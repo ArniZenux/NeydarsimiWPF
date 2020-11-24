@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Neydarsimi.Helper
 {
-    public enum Basic
+    public enum BasicNewTulkur
     {
-        update_neydarsimi
+        add_tulkur
     }
 
-    public class BasicChange
+    public class NewUserAdd
     {
-        public Basic basicData { get; set; }
+        public BasicNewTulkur basicData { get; set; }
     }
 }

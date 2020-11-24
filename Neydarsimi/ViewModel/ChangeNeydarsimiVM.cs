@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
@@ -263,6 +262,7 @@ namespace Neydarsimi.ViewModel
                 if (_tulkslisti != value)
                 {
                     _tulkslisti = value;
+                     
                     NotifyPropertyChanged("Tulkslisti");
                 }
             }
@@ -392,6 +392,7 @@ namespace Neydarsimi.ViewModel
                 if (item != null)
                 {
                     KennitalaBox = item.kt;
+                    TulkurBox = item.nafn; 
                 }
             }
             catch

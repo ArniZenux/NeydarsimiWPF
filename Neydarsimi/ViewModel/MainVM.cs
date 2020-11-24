@@ -165,8 +165,8 @@ namespace Neydarsimi.ViewModel
             }
         }
 
-        private ObservableCollection<Tulkur> _tulkslisti;
-        public ObservableCollection<Tulkur> Tulkslisti
+        private ObservableCollection<clsTulkur> _tulkslisti;
+        public ObservableCollection<clsTulkur> Tulkslisti
         {
             get
             {
@@ -174,8 +174,11 @@ namespace Neydarsimi.ViewModel
             }
             set
             {
-                _tulkslisti = value;
-                NotifyPropertyChanged("TulkurListi");
+                if (_tulkslisti != value)
+                {
+                    _tulkslisti = value;
+                    NotifyPropertyChanged("Tulkslisti");
+                }
             }
         }
 
@@ -221,6 +224,11 @@ namespace Neydarsimi.ViewModel
             SelectItemListbox_CMD = new RelayCommand(GetKt);
             
             _neydarsimiData = new ObservableCollection<clsNeydarsimi>();
+            _tulkslisti = new ObservableCollection<clsTulkur>();
+
+            EventSystem.Subscribe<BasicChange>(UpdateNeydarsimi);
+            EventSystem.Subscribe<NewUserAdd>(NewUserAdd_Fall);
+            EventSystem.Subscribe<UpdateUser>(UpdateUser_Fall);
 
             LoadNeydarsimi();
             LoadTulkur();
@@ -274,9 +282,20 @@ namespace Neydarsimi.ViewModel
             change_gsm.Show(); 
         }
 
-        public void ChangeBasis(BasicChange msg)
+        public void UpdateNeydarsimi(BasicChange msg)
         {
-            LoadNeydarsimi(); 
+            LoadNeydarsimi();
+        }
+
+        public void NewUserAdd_Fall(NewUserAdd msg)
+        {
+            LoadTulkur();
+        }
+
+        public void UpdateUser_Fall(UpdateUser msg)
+        {
+            LoadTulkur();
+            LoadNeydarsimi();
         }
 
         public void BookingProject_Fall(object obj)
@@ -365,9 +384,19 @@ namespace Neydarsimi.ViewModel
         //Hlaða list af túlkum. 
         public void LoadTulkur()
         {
+            _tulkslisti.Clear(); 
+
             var query = from d1 in context.Context.Tulkurs
                         select d1;
-            _tulkslisti = new ObservableCollection<Tulkur>(query);
+            
+            foreach(var str in query)
+            {
+                _tulkslisti.Add(new clsTulkur()
+                {
+                    kt = str.kt,
+                    nafn = str.nafn
+                });
+            }
         }
 
         public void LoadVettvangur()

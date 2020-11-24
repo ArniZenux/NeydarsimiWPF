@@ -135,7 +135,12 @@ namespace Neydarsimi.ViewModel
 
                     LoadTulkur();
 
-                    NullStilla(); 
+                    NullStilla();
+
+                    EventSystem.Publish<UpdateUser>(new UpdateUser
+                    {
+                       basicData = BasicTulkur.update_tulkur
+                    });
                 }
                 catch (Exception ex)
                 {

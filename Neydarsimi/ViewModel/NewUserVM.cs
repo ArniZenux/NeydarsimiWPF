@@ -87,7 +87,10 @@ namespace Neydarsimi.ViewModel
 
                     NullStilla();
 
-                    //bæta við eventSystem.publish seinna 
+                    EventSystem.Publish<NewUserAdd>(new NewUserAdd
+                    {
+                        basicData = BasicNewTulkur.add_tulkur
+                    });
 
                 }
                 catch (Exception ex)

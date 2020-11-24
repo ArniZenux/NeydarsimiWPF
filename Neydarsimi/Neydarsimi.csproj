@@ -114,7 +114,9 @@
     <Compile Include="Helper\clsVettvangur.cs" />
     <Compile Include="Helper\DataContextSingleton.cs" />
     <Compile Include="Helper\EventSystem.cs" />
+    <Compile Include="Helper\NewUserAdd.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
+    <Compile Include="Helper\UpdateUser.cs" />
     <Compile Include="Helper\ViewModelBase.cs" />
     <Compile Include="Model\Model1.Context.cs">
       <AutoGen>True</AutoGen>
