@@ -8,6 +8,7 @@ Neyðarsíminn er fyrir vakt táknmálstúlka t.d. um páska eða verslunarmanna
 Hugbúnaður hefur það hlutverk að einfalda skipulag túlkaþjónustunnar. Forritið getur geymt upplýsingar um hvaða túlkur á að sjá um neyðarsímann. Áður en hugbúnaður var smíðaður þá voru upplýsingar aðeins geymdar í Word eða munnlega. 
 
 Nýja útgáfan
+
 ![alt text](https://notendur.hi.is/~arnijoha/cv/img/neyarsimimvvm.jpg)
 
 Gamla útgáfan er skrifað á WinForm með Sqlite. 
