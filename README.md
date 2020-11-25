@@ -1,7 +1,7 @@
 # NeydarsimiWPF
 Neyðarsími í WPF með MVVM-högun. 
 
-Hugbúnaður er endurskrifaður á WPF með MVVM-högun.
+Hugbúnaður er endurskrifaður á WPF (C#) með MVVM-högun með LINQ ásamt Entity Framework. 
 
 Neyðarsíminn er fyrir vakt táknmálstúlka t.d. um páska eða verslunarmannahelgi. Neyðarsíminn virkar þannig að táknmálsnotendur geta haft samband við túlkaþjónustuna með smáskilaboðum og túlkur kemur á staðinn til að túlka.
 
