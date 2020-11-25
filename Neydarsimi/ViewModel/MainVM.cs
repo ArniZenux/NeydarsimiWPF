@@ -403,8 +403,17 @@ namespace Neydarsimi.ViewModel
         {
             _vettvangur = new ObservableCollection<clsVettvangur>()
             {
-                new clsVettvangur { tegund = "Þjóðarhátíð"  },
-                new clsVettvangur { tegund = "Aðdangsdagur" }
+                new clsVettvangur { tegund = "Venjuleg vakt"  },
+                new clsVettvangur { tegund = "Helgarvakt" },
+                new clsVettvangur { tegund = "Helgarvakt" },
+                new clsVettvangur { tegund = "Páskar" },
+                new clsVettvangur { tegund = "Sumardagurinn fyrsti" },
+                new clsVettvangur { tegund = "Verkalýðsdagurinn" },
+                new clsVettvangur { tegund = "Uppstigningardagur" },
+                new clsVettvangur { tegund = "Hvítasunnudagur og Annar í hvítasunnu" },
+                new clsVettvangur { tegund = "Íslenski þjóðhátíðardagurinn" },
+                new clsVettvangur { tegund = "Verslunarmannahelgi" },
+                new clsVettvangur { tegund = "Jól" }
             };
         }
         #endregion
